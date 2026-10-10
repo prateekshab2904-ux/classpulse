@@ -1,0 +1,7 @@
+node_modules/
+.env
+classpulse.sqlite
+classpulse.sqlite-shm
+classpulse.sqlite-wal
+*.log
+server-error.log
