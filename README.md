@@ -28,14 +28,16 @@ node server.js
 
 4. Keep the PowerShell window open. On the same computer, visit **http://localhost:4173/** in your browser.
 
-If PowerShell reports that port 4173 is already in use, start the app on port 4174 instead:
+If PowerShell reports `EADDRINUSE` or “address already in use,” a server is already using that port. Open its existing address in your browser instead of starting another copy. To stop a server, focus the PowerShell window where it is running and press `Ctrl+C`.
+
+If you cannot find the existing server window, choose another port, for example 4175:
 
 ```powershell
-$env:PORT = "4174"
+$env:PORT = "4175"
 node server.js
 ```
 
-Then visit **http://localhost:4174/**. Stop the server with `Ctrl+C` in its PowerShell window. The first start creates `classpulse.sqlite` beside `server.js` and seeds the fictional demo classroom. The database file is ignored by Git.
+Then visit **http://localhost:4175/**. If that port is also in use, choose a different unused number and use that same number in the browser address. Stop the server with `Ctrl+C` in its PowerShell window. The first start creates `classpulse.sqlite` beside `server.js` and seeds the fictional demo classroom. The database file is ignored by Git.
 ## Demo walkthrough
 
 1. On the landing page, choose **Open teacher dashboard**.
