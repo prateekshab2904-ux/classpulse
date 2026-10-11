@@ -2,24 +2,40 @@
 
 ClassPulse collects anonymous classroom doubts and helps teachers see which concepts appear repeatedly in those submissions. It highlights shared patterns; it does not score students or establish what any individual understands.
 
-## Run the app
+## Run the app on Windows
 
-Requirements: **Node.js 24 or later**. The current build uses Node's built-in `node:sqlite` module and has no npm package installation step.
+### One-time setup
+
+1. Install **Node.js 24 or later** from [nodejs.org](https://nodejs.org/en/download/). Choose the Windows installer and keep the option to add Node.js to `PATH` enabled.
+2. Finish installation, then close and reopen PowerShell so it picks up the updated `PATH`.
+3. Check that Node.js is available:
 
 ```powershell
-cd path\to\classpulse
+node --version
+```
+
+The command should print `v24` or a higher major version. If PowerShell says `node` is not recognized, restart PowerShell; if that does not help, rerun the Node.js installer and ensure it adds Node to `PATH`.
+
+### Download and start ClassPulse
+
+1. On GitHub, open this repository, choose **Code → Download ZIP**, and extract the ZIP. (Alternatively, clone the repository with Git.)
+2. In File Explorer, open the extracted `classpulse` project folder, select the address bar, type `powershell`, and press Enter. This opens PowerShell in the correct folder.
+3. Confirm that the prompt is in the project folder, then start the server:
+
+```powershell
 node server.js
 ```
 
-Then open **http://localhost:4173** in the same computer's browser. Keep the terminal running while you use the app. To use another port in PowerShell:
+4. Keep the PowerShell window open. On the same computer, visit **http://localhost:4173/** in your browser.
+
+If PowerShell reports that port 4173 is already in use, start the app on port 4174 instead:
 
 ```powershell
 $env:PORT = "4174"
 node server.js
 ```
 
-The first start creates `classpulse.sqlite` beside `server.js` and seeds the fictional demo classroom. The database file is ignored by Git. Stop the server with `Ctrl+C`.
-
+Then visit **http://localhost:4174/**. Stop the server with `Ctrl+C` in its PowerShell window. The first start creates `classpulse.sqlite` beside `server.js` and seeds the fictional demo classroom. The database file is ignored by Git.
 ## Demo walkthrough
 
 1. On the landing page, choose **Open teacher dashboard**.
