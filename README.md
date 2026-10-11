@@ -38,6 +38,13 @@ node server.js
 ```
 
 Then visit **http://localhost:4175/**. If that port is also in use, choose a different unused number and use that same number in the browser address. Stop the server with `Ctrl+C` in its PowerShell window. The first start creates `classpulse.sqlite` beside `server.js` and seeds the fictional demo classroom. The database file is ignored by Git.
+
+## Deploy a public demo
+
+This repository includes a Render Blueprint in `render.yaml`. After pushing the project to GitHub, open the [Render dashboard](https://dashboard.render.com/), choose **New → Blueprint**, connect the `prateekshab2904-ux/classpulse` repository, and create the Blueprint. Render uses Node.js 24 and runs `node server.js`; the service is configured for the free demo tier.
+
+The free tier can sleep after 15 minutes without traffic and takes about a minute to wake on a later visit. Its filesystem is temporary, so the SQLite database and submitted doubts reset when the service restarts or sleeps. This deployment is for showcasing the fictional demo only. Do not collect real student information: this prototype has no teacher authentication, and it is not hardened for real classroom use.
+
 ## Demo walkthrough
 
 1. On the landing page, choose **Open teacher dashboard**.
@@ -68,6 +75,7 @@ public/app.js          Client-side pages and API integration
 public/styles.css      Responsive visual design
 test/app.test.js       Node built-in API tests
 .env.example           Configuration placeholders
+render.yaml            Render Blueprint for a public demo deployment
 ```
 
 ## Tests

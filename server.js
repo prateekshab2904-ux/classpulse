@@ -4,7 +4,7 @@ const path = require('node:path');
 const { randomUUID } = require('node:crypto');
 const { DatabaseSync } = require('node:sqlite');
 
-const ROOT = __dirname, PORT = Number(process.env.PORT || 4173);
+const ROOT = __dirname, PORT = Number(process.env.PORT || 4173), HOST = process.env.HOST || '0.0.0.0';
 const rateBuckets=new Map();
 const db = new DatabaseSync(path.join(ROOT, 'classpulse.sqlite'));
 db.exec(`PRAGMA journal_mode=WAL;
@@ -48,5 +48,5 @@ async function handler(req,res){const u=new URL(req.url,'http://localhost'),p=u.
  if(p.startsWith('/api/'))return json(res,404,{error:'Route not found'});
  let file=p==='/'?'index.html':p.slice(1);file=path.join(ROOT,'public',file);if(!file.startsWith(path.join(ROOT,'public')))return json(res,403,{error:'Forbidden'});if(!fs.existsSync(file))return json(res,404,{error:'Not found'});res.writeHead(200,{'Content-Type':file.endsWith('.css')?'text/css':file.endsWith('.js')?'text/javascript':'text/html'});fs.createReadStream(file).pipe(res)
  }catch(e){json(res,500,{error:'Request could not be completed.',detail:process.env.NODE_ENV==='development'?e.message:undefined})}}
-if(require.main===module)http.createServer(handler).listen(PORT,()=>console.log(`ClassPulse running at http://localhost:${PORT}`));
+if(require.main===module)http.createServer(handler).listen(PORT,HOST,()=>console.log(`ClassPulse running on ${HOST}:${PORT}`));
 module.exports={handler,db,clusters,sessionView};
